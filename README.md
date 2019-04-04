@@ -4,4 +4,4 @@ Gatsby.js and localization PoC using [gatsby-plugin-intl](https://github.com/wiz
 
 **Data source:** http://18.184.95.18/i18n/ef-stories-2019
 
-**Demo:** https://ef-poc.emadic.io/
+**Demo:** http://ef-poc.emadic.io/
