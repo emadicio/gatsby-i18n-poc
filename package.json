@@ -1,0 +1,25 @@
+{
+  "name": "gatsby-i18n-poc",
+  "description": "Gatsby + localization demo",
+  "version": "0.0.1",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "flat": "^4.1.0",
+    "gatsby": "^2.3.3",
+    "gatsby-plugin-intl": "^0.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
+  }
+}
