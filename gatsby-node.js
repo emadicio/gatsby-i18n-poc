@@ -15,21 +15,6 @@ exports.onPreBootstrap = async () => {
     fs.writeFileSync(`./src/intl/languages.json`, JSON.stringify(languages));
     for (let lang of languages){
         fs.writeFileSync(`./src/intl/${lang}.json`, JSON.stringify(flatten(locales[lang])));
-
-        /*
-        * react-intl breaks with custom locale keys such as "we" and "ch"
-        * so we need to create the relative files in react-intl/locale-data
-        * 
-        * TODO: Find a better solution
-        * note: react-intl.addLocaleData doesn't seem to create the necessary file
-        */
-        if (!fs.existsSync(`./node_modules/react-intl/locale-data/${lang}.js`)){
-            const file = fs.readFileSync('./node_modules/react-intl/locale-data/agq.js', 'utf8');
-            fs.writeFileSync(
-                `./node_modules/react-intl/locale-data/${lang}.js`,
-                file.replace(/agq/g, lang)
-            )
-        }
     }
 
     console.log('Locales updated.');

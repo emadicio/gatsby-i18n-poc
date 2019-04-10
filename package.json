@@ -15,7 +15,7 @@
     "axios": "^0.18.0",
     "flat": "^4.1.0",
     "gatsby": "^2.3.3",
-    "gatsby-plugin-intl": "^0.1.0",
+    "gatsby-plugin-intl": "git+https://github.com/emadicio/gatsby-plugin-intl.git",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
