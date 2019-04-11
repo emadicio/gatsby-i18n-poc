@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "gatsby build",
+    "build:staging": "GATSBY_ENV=staging gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write src/**/*.{js,jsx}",
     "start": "npm run develop",
@@ -13,6 +14,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^7.0.0",
     "flat": "^4.1.0",
     "gatsby": "^2.3.3",
     "gatsby-plugin-intl": "git+https://github.com/emadicio/gatsby-plugin-intl.git",
