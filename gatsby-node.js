@@ -23,10 +23,10 @@ exports.onPreBootstrap = async () => {
       await fs.mkdir(intlPath);
     }
     
-    await fs.writeFile(path.join(intlPath, 'languages.json'), JSON.stringify(languages));
+    await fs.writeFile(path.join(intlPath, 'languages.json'), JSON.stringify(languages, null, 2));
   
     for (const lang of languages){
-      await fs.writeFile(path.join(intlPath, `${lang}.json`), JSON.stringify(locales[lang]));
+      await fs.writeFile(path.join(intlPath, `${lang}.json`), JSON.stringify(locales[lang], null, 2));
     }
   } catch(e) {
     console.error(e);
