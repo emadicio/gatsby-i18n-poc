@@ -1,27 +1,37 @@
-const dotenv = require('dotenv');
-const fs = require('fs');
-const flatten = require('flat')
+const path = require('path');
+const fs = require('fs').promises;
 const axios = require('axios');
-const env = process.env.GATSBY_ENV || process.env.NODE_ENV || 'development';
-
-dotenv.config({
-    path: `.env.${env}`,
-}) 
+const intlPath = path.join(__dirname, 'i18n');
 
 /*
 * Pulls updated locales
 */
 exports.onPreBootstrap = async () => {
-    console.log('[SERVER] Updating locales...');
-
-    const res = await axios.get('http://18.184.95.18/i18n/ef-stories-2019');
+  console.log('[SERVER] Updating locales...');
+  
+  try {
+    const localesBaseUrl = 'http://18.184.95.18/i18n';
+    const campaignCode = 'ef-stories-2019';
+  
+    const res = await axios.get(`${localesBaseUrl}/${campaignCode}`);
     const locales = res.data;
     const languages = Object.keys(locales);
-    
-    fs.writeFileSync(`./src/intl/languages.json`, JSON.stringify(languages));
-    for (const lang of languages){
-        fs.writeFileSync(`./src/intl/${lang}.json`, JSON.stringify(flatten(locales[lang])));
-    }
 
-    console.log('[SERVER] Locales updated.');
+    try {
+      await fs.access(intlPath, fs.F_OK);
+    } catch(e) {
+      await fs.mkdir(intlPath);
+    }
+    
+    await fs.writeFile(path.join(intlPath, 'languages.json'), JSON.stringify(languages));
+  
+    for (const lang of languages){
+      await fs.writeFile(path.join(intlPath, `${lang}.json`), JSON.stringify(locales[lang]));
+    }
+  } catch(e) {
+    console.error(e);
+    process.exit(1);
+  }
+
+  console.log('[SERVER] Locales updated.');
 }
